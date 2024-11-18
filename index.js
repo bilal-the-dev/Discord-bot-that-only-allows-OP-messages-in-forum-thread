@@ -8,7 +8,8 @@ const {
   TOKEN,
   FORUM_CHANNEL_IDS,
   WARNING_CHANNEL_ID,
-  RECRUITEMENT_BAN_ROLE_ID,
+  ROLE_TO_ADD,
+  ROLE_TO_REMOVE,
 } = process.env;
 
 const channelIdArray = FORUM_CHANNEL_IDS.split(",");
@@ -62,8 +63,11 @@ client.on(Events.MessageCreate, async (message) => {
 
     await warningChannel.send({ content: member.toString(), embeds: [embed] });
 
-    if (member.roles.cache.has(RECRUITEMENT_BAN_ROLE_ID)) return;
-    await member.roles.add(RECRUITEMENT_BAN_ROLE_ID);
+    if (!member.roles.cache.has(ROLE_TO_ADD))
+      await member.roles.add(ROLE_TO_ADD);
+
+    if (member.roles.cache.has(ROLE_TO_REMOVE))
+      await member.roles.remove(ROLE_TO_REMOVE);
   } catch (error) {
     console.log(error);
   }
