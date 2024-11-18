@@ -53,13 +53,12 @@ client.on(Events.MessageCreate, async (message) => {
       .setTitle("Rise of Kingdom Manager")
       .setThumbnail(member.displayAvatarURL())
       .setDescription(
-        `${member.displayName} was found sending message in ${
-          message.channel
-        } (<t:${Math.floor(Date.now() / 1000)}:R>) while he was not OP 🫨`
+        `**User**: ${member.displayName} (${member.id})\n**Reason**:${member} has attempted to bump a post in ${message.channel} (${message.channel.id}), and been recruitment banned`
       )
       .setFooter({
-        text: "Recruitement Manager",
-      });
+        text: "Recruitment Manager",
+      })
+      .setTimestamp();
 
     await warningChannel.send({ content: member.toString(), embeds: [embed] });
 
@@ -68,6 +67,8 @@ client.on(Events.MessageCreate, async (message) => {
 
     if (member.roles.cache.has(ROLE_TO_REMOVE))
       await member.roles.remove(ROLE_TO_REMOVE);
+
+    await member.send({ embeds: [embed] }).catch(() => null);
   } catch (error) {
     console.log(error);
   }
