@@ -50,7 +50,7 @@ client.on(Events.MessageCreate, async (message) => {
         name: `${member.displayName}`,
         iconURL: `${member.displayAvatarURL()}`, // Replace with the avatar URL or desired image
       })
-      .setTitle("Rise of Kingdom Manager")
+      .setTitle("ROK Recruitment")
       .setThumbnail(member.displayAvatarURL())
       .setDescription(
         `**User**: ${member.displayName} (${member.id})\n**Reason:** ${member} has attempted to bump a post in ${message.channel}, and been recruitment banned`
@@ -74,7 +74,7 @@ client.on(Events.MessageCreate, async (message) => {
         name: `${member.displayName}`,
         iconURL: `${member.displayAvatarURL()}`, // Replace with the avatar URL or desired image
       })
-      .setTitle("Rise of Kingdom Manager")
+      .setTitle("ROK Recruitment")
       .setThumbnail(member.displayAvatarURL())
       .setDescription(
         `**Hey ${member}, you have attempted to bump a post in ${message.channel}, and been recruitment banned which will automatically be lifted in 30 days.**`
