@@ -53,7 +53,7 @@ client.on(Events.MessageCreate, async (message) => {
       .setTitle("Rise of Kingdom Manager")
       .setThumbnail(member.displayAvatarURL())
       .setDescription(
-        `**User: ${member.displayName} (${member.id})\nReason:${member} has attempted to bump a post in ${message.channel}, and been recruitment banned**`
+        `**User**: ${member.displayName} (${member.id})\n**Reason:** ${member} has attempted to bump a post in ${message.channel}, and been recruitment banned`
       )
       .setFooter({
         text: "Recruitment Manager",
@@ -68,8 +68,23 @@ client.on(Events.MessageCreate, async (message) => {
     if (member.roles.cache.has(ROLE_TO_REMOVE))
       await member.roles.remove(ROLE_TO_REMOVE);
 
-    const memberWarnMessage = `Hey ${member}, you have attempted to bump a post in ${message.channel}, and been recruitment banned which will automatically be lifted in 30 days.`;
-    await member.send(memberWarnMessage).catch(() => null);
+    const memberEmbed = new EmbedBuilder()
+      .setColor("#313338")
+      .setAuthor({
+        name: `${member.displayName}`,
+        iconURL: `${member.displayAvatarURL()}`, // Replace with the avatar URL or desired image
+      })
+      .setTitle("Rise of Kingdom Manager")
+      .setThumbnail(member.displayAvatarURL())
+      .setDescription(
+        `**Hey ${member}, you have attempted to bump a post in ${message.channel}, and been recruitment banned which will automatically be lifted in 30 days.**`
+      )
+      .setFooter({
+        text: "Recruitment Manager",
+      })
+      .setTimestamp();
+
+    await member.send({ embeds: [memberEmbed] }).catch(() => null);
   } catch (error) {
     console.log(error);
   }
