@@ -6,10 +6,12 @@ const {
 } = require("discord.js");
 const {
   TOKEN,
-  FORUM_CHANNEL_ID,
+  FORUM_CHANNEL_IDS,
   WARNING_CHANNEL_ID,
   RECRUITEMENT_BAN_ROLE_ID,
 } = process.env;
+
+const channelIdArray = FORUM_CHANNEL_IDS.split(",");
 
 const client = new Client({
   intents: [
@@ -34,9 +36,7 @@ client.on(Events.MessageCreate, async (message) => {
       guild,
     } = message;
 
-    if (parentId !== FORUM_CHANNEL_ID) return;
-    console.log(member.id);
-    console.log(ownerId);
+    if (!channelIdArray.includes(parentId)) return;
 
     if (member.id === ownerId) return console.log("OP sent a message");
 
