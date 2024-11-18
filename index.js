@@ -68,7 +68,8 @@ client.on(Events.MessageCreate, async (message) => {
     if (member.roles.cache.has(ROLE_TO_REMOVE))
       await member.roles.remove(ROLE_TO_REMOVE);
 
-    await member.send({ embeds: [embed] }).catch(() => null);
+    const memberWarnMessage = `Hey ${member}, you have attempted to bump a post in ${message.channel} (${message.channel.id}), and been recruitment banned which will automatically be lifted in 30 days.`;
+    await member.send(memberWarnMessage).catch(() => null);
   } catch (error) {
     console.log(error);
   }
